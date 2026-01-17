@@ -27,7 +27,7 @@
             max-width: 450px;
             background: white;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             overflow: hidden;
         }
 
@@ -35,7 +35,7 @@
         .header {
             background: #1a3a5f;
             color: white;
-            padding: 30px;
+            padding: 25px;
             text-align: center;
         }
 
@@ -47,15 +47,15 @@
         }
 
         .logo-placeholder {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             background: white;
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .logo-placeholder img {
@@ -66,7 +66,7 @@
         }
 
         .logo-text h1 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin-bottom: 5px;
         }
 
@@ -119,6 +119,7 @@
         .form-input:focus {
             outline: none;
             border-color: #2c5282;
+            box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.1);
         }
 
         .form-btn {
@@ -165,11 +166,22 @@
             cursor: pointer;
             font-size: 0.9rem;
             text-decoration: underline;
+            padding: 0;
+        }
+
+        .toggle-link:hover, .forgot-link:hover {
+            color: #1a3a5f;
         }
 
         /* PANELS */
         .form-panel {
             display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hidden {
@@ -185,19 +197,19 @@
             font-size: 0.9rem;
         }
 
-        .success {
+        .message.success {
             background: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
 
-        .error {
+        .message.error {
             background: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
 
-        .info {
+        .message.info {
             background: #d1ecf1;
             color: #0c5460;
             border: 1px solid #bee5eb;
@@ -235,11 +247,6 @@
             .header, .form-section {
                 padding: 20px;
             }
-            
-            .logo-placeholder {
-                width: 100px;
-                height: 100px;
-            }
         }
     </style>
 </head>
@@ -275,17 +282,17 @@
                     <input type="password" id="password" class="form-input" placeholder="Enter password">
                 </div>
                 
-                <button class="form-btn" onclick="handleLogin()">
+                <button class="form-btn" id="loginBtn">
                     <i class="fas fa-sign-in-alt"></i> Login
                 </button>
                 
                 <div class="form-links">
                     <div class="link-text">
                         Don't have an account? 
-                        <button class="toggle-link" onclick="showCreateAccount()">Create Account</button>
+                        <button class="toggle-link" id="showCreateAccountBtn">Create Account</button>
                     </div>
                     <div>
-                        <button class="forgot-link" onclick="showForgotPassword()">Forgot Password?</button>
+                        <button class="forgot-link" id="showForgotPasswordBtn">Forgot Password?</button>
                     </div>
                 </div>
             </div>
@@ -307,17 +314,17 @@
                 
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <input type="password" id="newPassword" class="form-input" placeholder="Create a password">
+                    <input type="password" id="newPassword" class="form-input" placeholder="Create a password (min. 6 characters)">
                 </div>
                 
-                <button class="form-btn" onclick="handleCreateAccount()">
+                <button class="form-btn" id="createAccountBtn">
                     <i class="fas fa-user-plus"></i> Create Account
                 </button>
                 
                 <div class="form-links">
                     <div class="link-text">
                         Already have an account? 
-                        <button class="toggle-link" onclick="showLogin()">Login here</button>
+                        <button class="toggle-link" id="showLoginBtn">Login here</button>
                     </div>
                 </div>
             </div>
@@ -330,12 +337,12 @@
                 <div class="contact-info">
                     <h4>Please contact the system administrator</h4>
                     <p><strong>Jayvee Caringal (Admin)</strong></p>
-                    <p>admin@group2system.com</p>
-                    <p>Contact for password reset</p>
+                    <p><i class="fas fa-envelope"></i> admin@group2system.com</p>
+                    <p><i class="fas fa-phone"></i> Contact for password reset</p>
                 </div>
                 
                 <div class="form-links" style="margin-top: 20px;">
-                    <button class="toggle-link" onclick="showLogin()">
+                    <button class="toggle-link" id="backToLoginBtn">
                         <i class="fas fa-arrow-left"></i> Back to Login
                     </button>
                 </div>
@@ -348,73 +355,107 @@
         <!-- FOOTER -->
         <div class="footer">
             <p><strong>© 2024 Book of Transparency System</strong></p>
-            <p>For authorized users only</p>
+            <p>For authorized users only. All activities are logged.</p>
         </div>
     </div>
 
-    <!-- Supabase -->
+    <!-- Supabase JS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <script>
         // Initialize Supabase
         const supabaseUrl = 'https://xudzyjnfntxcxgvocsxy.supabase.co';
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh1ZHp5am5mbnR4Y3hndm9jc3h5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg2NTc3ODQsImV4cCI6MjA4NDIzMzc4NH0.8BIHbF4ZqddVDMmR8869CE3N4CmoOuWn1xihUbRK6FU';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        
+        // Create Supabase client
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+        
+        // DOM Elements
+        const loginPanel = document.getElementById('loginPanel');
+        const createAccountPanel = document.getElementById('createAccountPanel');
+        const forgotPasswordPanel = document.getElementById('forgotPasswordPanel');
+        const messageEl = document.getElementById('message');
+        
+        // Buttons
+        const loginBtn = document.getElementById('loginBtn');
+        const createAccountBtn = document.getElementById('createAccountBtn');
+        const showCreateAccountBtn = document.getElementById('showCreateAccountBtn');
+        const showForgotPasswordBtn = document.getElementById('showForgotPasswordBtn');
+        const showLoginBtn = document.getElementById('showLoginBtn');
+        const backToLoginBtn = document.getElementById('backToLoginBtn');
+        
+        // Input Fields
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const fullNameInput = document.getElementById('fullName');
+        const newUsernameInput = document.getElementById('newUsername');
+        const newPasswordInput = document.getElementById('newPassword');
         
         // Show/Hide Functions
-        function showLogin() {
-            document.getElementById('loginPanel').classList.remove('hidden');
-            document.getElementById('createAccountPanel').classList.add('hidden');
-            document.getElementById('forgotPasswordPanel').classList.add('hidden');
+        function showPanel(panelToShow) {
+            // Hide all panels
+            loginPanel.classList.add('hidden');
+            createAccountPanel.classList.add('hidden');
+            forgotPasswordPanel.classList.add('hidden');
+            
+            // Show requested panel
+            panelToShow.classList.remove('hidden');
+            
+            // Clear message
             clearMessage();
+            
+            // Auto-focus first input
+            setTimeout(() => {
+                const firstInput = panelToShow.querySelector('input');
+                if (firstInput) firstInput.focus();
+            }, 100);
+        }
+        
+        function showLogin() {
+            showPanel(loginPanel);
         }
         
         function showCreateAccount() {
-            document.getElementById('loginPanel').classList.add('hidden');
-            document.getElementById('createAccountPanel').classList.remove('hidden');
-            document.getElementById('forgotPasswordPanel').classList.add('hidden');
-            clearMessage();
+            showPanel(createAccountPanel);
         }
         
         function showForgotPassword() {
-            document.getElementById('loginPanel').classList.add('hidden');
-            document.getElementById('createAccountPanel').classList.add('hidden');
-            document.getElementById('forgotPasswordPanel').classList.remove('hidden');
-            clearMessage();
+            showPanel(forgotPasswordPanel);
         }
         
         // Message Functions
         function showMessage(text, type) {
-            const messageEl = document.getElementById('message');
             messageEl.textContent = text;
             messageEl.className = `message ${type}`;
             messageEl.classList.remove('hidden');
             
             if (type !== 'error') {
-                setTimeout(() => {
-                    messageEl.classList.add('hidden');
-                }, 5000);
+                setTimeout(clearMessage, 5000);
             }
         }
         
         function clearMessage() {
-            const messageEl = document.getElementById('message');
             messageEl.classList.add('hidden');
+            messageEl.textContent = '';
         }
         
         // Login Function
         async function handleLogin() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
             
             if (!username || !password) {
                 showMessage('Please enter username and password', 'error');
                 return;
             }
             
-            showMessage('Logging in...', 'info');
+            // Show loading state
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+            loginBtn.disabled = true;
             
             try {
+                console.log('Attempting login for:', username);
+                
                 // Get user from Supabase
                 const { data: user, error } = await supabase
                     .from('users')
@@ -424,7 +465,16 @@
                     .single();
                 
                 if (error) {
-                    showMessage('User not found or inactive', 'error');
+                    console.error('Login error:', error);
+                    
+                    if (error.code === 'PGRST116') {
+                        showMessage('User not found. Please check username.', 'error');
+                    } else {
+                        showMessage('Login error. Please try again.', 'error');
+                    }
+                    
+                    loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+                    loginBtn.disabled = false;
                     return;
                 }
                 
@@ -440,24 +490,31 @@
                     // Redirect to dashboard
                     setTimeout(() => {
                         window.location.href = 'dashboard.html';
-                    }, 1000);
+                    }, 1500);
+                    
                 } else {
-                    showMessage('Invalid password', 'error');
+                    showMessage('Invalid password. Please try again.', 'error');
+                    loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+                    loginBtn.disabled = false;
                 }
                 
             } catch (error) {
-                showMessage('Login failed: ' + error.message, 'error');
+                console.error('Login failed:', error);
+                showMessage('Login failed. Please try again.', 'error');
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+                loginBtn.disabled = false;
             }
         }
         
         // Create Account Function
         async function handleCreateAccount() {
-            const fullName = document.getElementById('fullName').value;
-            const username = document.getElementById('newUsername').value;
-            const password = document.getElementById('newPassword').value;
+            const fullName = fullNameInput.value.trim();
+            const username = newUsernameInput.value.trim();
+            const password = newPasswordInput.value;
             
+            // Validation
             if (!fullName || !username || !password) {
-                showMessage('Please fill all fields', 'error');
+                showMessage('Please fill in all fields', 'error');
                 return;
             }
             
@@ -466,55 +523,107 @@
                 return;
             }
             
-            showMessage('Creating account...', 'info');
+            if (username.length < 3) {
+                showMessage('Username must be at least 3 characters', 'error');
+                return;
+            }
+            
+            // Show loading state
+            createAccountBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+            createAccountBtn.disabled = true;
             
             try {
                 // Check if username exists
-                const { data: existingUser } = await supabase
+                const { data: existingUser, error: checkError } = await supabase
                     .from('users')
                     .select('username')
                     .eq('username', username)
                     .maybeSingle();
                 
+                if (checkError) {
+                    console.error('Check username error:', checkError);
+                }
+                
                 if (existingUser) {
-                    showMessage('Username already exists', 'error');
+                    showMessage('Username already exists. Please choose another.', 'error');
+                    createAccountBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+                    createAccountBtn.disabled = false;
                     return;
                 }
                 
                 // Create new user
-                const { error } = await supabase
+                const { error: insertError } = await supabase
                     .from('users')
                     .insert([{
                         username: username,
                         full_name: fullName,
                         role: 'pending',
                         password_hash: password,
-                        is_active: false
+                        is_active: false,
+                        is_approved: false
                     }]);
                 
-                if (error) {
-                    showMessage('Error creating account: ' + error.message, 'error');
+                if (insertError) {
+                    console.error('Create account error:', insertError);
+                    showMessage('Failed to create account. Please try again.', 'error');
+                    createAccountBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+                    createAccountBtn.disabled = false;
                     return;
                 }
                 
-                showMessage('Account created! Wait for admin approval.', 'success');
+                // Success
+                showMessage('✅ Account created successfully! Please wait for admin approval.', 'success');
+                createAccountBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+                createAccountBtn.disabled = false;
                 
-                // Return to login after 3 seconds
+                // Clear form and return to login after delay
                 setTimeout(() => {
+                    fullNameInput.value = '';
+                    newUsernameInput.value = '';
+                    newPasswordInput.value = '';
                     showLogin();
                 }, 3000);
                 
             } catch (error) {
-                showMessage('Error: ' + error.message, 'error');
+                console.error('Create account error:', error);
+                showMessage('Failed to create account. Please try again.', 'error');
+                createAccountBtn.innerHTML = '<i class="fas fa-user-plus"></i> Create Account';
+                createAccountBtn.disabled = false;
             }
         }
         
-        // Initialize - focus on username field
+        // Event Listeners
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('username').focus();
+            console.log('Login page loaded');
             
-            // Test with default credentials (remove in production)
-            console.log('Default logins: jayvee/ADMIN01, guest/GUEST123');
+            // Button click events
+            loginBtn.addEventListener('click', handleLogin);
+            createAccountBtn.addEventListener('click', handleCreateAccount);
+            showCreateAccountBtn.addEventListener('click', showCreateAccount);
+            showForgotPasswordBtn.addEventListener('click', showForgotPassword);
+            showLoginBtn.addEventListener('click', showLogin);
+            backToLoginBtn.addEventListener('click', showLogin);
+            
+            // Enter key support
+            document.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    if (!loginPanel.classList.contains('hidden')) {
+                        handleLogin();
+                    } else if (!createAccountPanel.classList.contains('hidden')) {
+                        handleCreateAccount();
+                    }
+                }
+            });
+            
+            // Auto-focus username on load
+            setTimeout(() => {
+                if (usernameInput) usernameInput.focus();
+            }, 500);
+            
+            // For debugging - test with default credentials
+            console.log('Default logins available:');
+            console.log('- jayvee / ADMIN01 (Admin)');
+            console.log('- guest / GUEST123 (Guest)');
         });
     </script>
 </body>
