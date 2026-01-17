@@ -25,7 +25,29 @@ CREATE TABLE IF NOT EXISTS expenses (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()),
   created_by VARCHAR(50)
 );
+-- Update users table to support pending accounts
+ALTER TABLE users ADD COLUMN IF NOT EXISTS is_approved BOOLEAN DEFAULT false;
 
+-- Create function to approve pending users
+CREATE OR REPLACE FUNCTION approve_user(user_id BIGINT, approver_id BIGINT)
+RETURNS void AS $$
+BEGIN
+    UPDATE users 
+    SET is_active = true, 
+        is_approved = true,
+        updated_at = NOW()
+    WHERE id = user_id;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create view to see pending users
+CREATE OR REPLACE VIEW pending_users AS
+SELECT id, username, full_name, created_at
+FROM users
+WHERE role = 'pending' AND is_active = false;
+
+-- Update existing users to be approved
+UPDATE users SET is_approved = true WHERE role != 'pending';
 -- Penalties Table
 CREATE TABLE IF NOT EXISTS penalties (
   id BIGSERIAL PRIMARY KEY,
