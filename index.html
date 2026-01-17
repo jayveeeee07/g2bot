@@ -6,12 +6,11 @@
     <title>Login - Book of Transparency System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* =========== RESET & BASE STYLES =========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
 
         body {
@@ -25,162 +24,77 @@
 
         .container {
             width: 100%;
-            max-width: 1200px;
-            background-color: white;
-            border-radius: 20px;
+            max-width: 450px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            display: flex;
-            min-height: 600px;
         }
 
-        /* =========== LEFT SIDE - WELCOME =========== */
-        .welcome-side {
-            flex: 1;
-            background: linear-gradient(135deg, #1a3a5f 0%, #2c5282 100%);
+        /* HEADER */
+        .header {
+            background: #1a3a5f;
             color: white;
-            padding: 50px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .welcome-side::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('logo.jpg') center/contain no-repeat;
-            opacity: 0.1;
-            z-index: 0;
+            padding: 30px;
+            text-align: center;
         }
 
         .logo-container {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 20px;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
+            gap: 15px;
         }
 
         .logo-placeholder {
-            width: 100px;
-            height: 100px;
-            background-color: white;
-            border-radius: 15px;
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            border: 3px solid white;
-            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .logo-placeholder img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
-        }
-
-        .logo-text {
-            flex: 1;
+            object-fit: contain;
+            padding: 10px;
         }
 
         .logo-text h1 {
-            font-size: 2.2rem;
-            margin-bottom: 8px;
-            font-weight: 700;
-            line-height: 1.2;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
         }
 
         .logo-text p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
-
-        .welcome-content {
-            margin-top: 30px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .welcome-content h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .features-list {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-        .features-list li {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1rem;
-        }
-
-        .features-list i {
-            color: #63b3ed;
-            font-size: 1.2rem;
-        }
-
-        .system-info {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            z-index: 1;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
             font-size: 0.9rem;
             opacity: 0.9;
         }
 
-        /* =========== RIGHT SIDE - FORMS =========== */
-        .form-side {
-            flex: 1;
-            padding: 50px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .form-container {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
+        /* FORM SECTION */
+        .form-section {
+            padding: 30px;
         }
 
         .form-title {
             color: #1a3a5f;
-            font-size: 2rem;
-            margin-bottom: 10px;
-            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            text-align: center;
         }
 
         .form-subtitle {
             color: #666;
-            margin-bottom: 30px;
-            font-size: 1rem;
+            margin-bottom: 25px;
+            text-align: center;
+            font-size: 0.9rem;
         }
 
-        /* =========== FORM GROUPS =========== */
+        /* FORM STYLES */
         .form-group {
             margin-bottom: 20px;
         }
@@ -190,515 +104,315 @@
             color: #1a3a5f;
             font-weight: 600;
             margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-
-        .input-with-icon {
-            position: relative;
+            font-size: 0.9rem;
         }
 
         .form-input {
             width: 100%;
-            padding: 14px 45px 14px 15px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
             font-size: 1rem;
-            transition: all 0.3s;
-            color: #333;
+            transition: 0.3s;
         }
 
         .form-input:focus {
             outline: none;
             border-color: #2c5282;
-            box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.1);
         }
 
-        .input-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #a0aec0;
-            font-size: 1.2rem;
-        }
-
-        /* =========== BUTTONS =========== */
-        .login-btn {
+        .form-btn {
             width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #2c5282 0%, #1a3a5f 100%);
+            padding: 14px;
+            background: #2c5282;
             color: white;
             border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
+            border-radius: 8px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: 0.3s;
+            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-top: 10px;
         }
 
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(44, 82, 130, 0.2);
+        .form-btn:hover {
+            background: #1a3a5f;
         }
 
-        .login-btn:active {
-            transform: translateY(0);
-        }
-
-        /* =========== LINKS =========== */
+        /* LINKS */
         .form-links {
             text-align: center;
-            margin-top: 25px;
+            margin-top: 20px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
         }
 
         .link-text {
             color: #666;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .toggle-link, .forgot-link {
             color: #2c5282;
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: color 0.3s;
             background: none;
             border: none;
-            font-size: 0.95rem;
-        }
-
-        .toggle-link:hover, .forgot-link:hover {
-            color: #1a3a5f;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
             text-decoration: underline;
         }
 
-        /* =========== MESSAGES =========== */
-        .message {
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: none;
-            text-align: center;
-            font-size: 0.95rem;
+        /* PANELS */
+        .form-panel {
+            display: block;
         }
 
-        .message.success {
-            background-color: #d4edda;
+        .hidden {
+            display: none !important;
+        }
+
+        /* MESSAGES */
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .success {
+            background: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
 
-        .message.error {
-            background-color: #f8d7da;
+        .error {
+            background: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
 
-        .message.info {
-            background-color: #d1ecf1;
+        .info {
+            background: #d1ecf1;
             color: #0c5460;
             border: 1px solid #bee5eb;
         }
 
-        /* =========== FORM STATES =========== */
-        .form-section {
-            display: block;
-        }
-
-        .form-section.hidden {
-            display: none;
-        }
-
-        /* =========== LOADING =========== */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-top: 3px solid white;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* =========== FOOTER =========== */
+        /* FOOTER */
         .footer {
             text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e8f0;
-            color: #718096;
-            font-size: 0.9rem;
-        }
-
-        .test-credentials {
-            background-color: #f7fafc;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            border-left: 4px solid #2c5282;
-        }
-
-        .test-credentials h4 {
-            color: #1a3a5f;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-
-        .credentials-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 8px;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            color: #666;
             font-size: 0.85rem;
+            background: #f8f9fa;
         }
 
-        .cred-item {
-            background-color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: 1px solid #e2e8f0;
+        /* FORGOT PASSWORD */
+        .contact-info {
+            background: #e6f2ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
         }
 
-        /* =========== RESPONSIVE =========== */
-        @media (max-width: 992px) {
+        .contact-info h4 {
+            color: #1a3a5f;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 480px) {
             .container {
-                flex-direction: column;
-                max-width: 500px;
+                border-radius: 10px;
             }
             
-            .welcome-side, .form-side {
-                padding: 40px 30px;
-            }
-            
-            .logo-text h1 {
-                font-size: 1.8rem;
+            .header, .form-section {
+                padding: 20px;
             }
             
             .logo-placeholder {
-                width: 80px;
-                height: 80px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .container {
-                border-radius: 15px;
-            }
-            
-            .welcome-side, .form-side {
-                padding: 30px 20px;
-            }
-            
-            .logo-container {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
-            }
-            
-            .logo-placeholder {
-                width: 70px;
-                height: 70px;
-            }
-            
-            .form-title {
-                font-size: 1.8rem;
-            }
-            
-            .form-input {
-                padding: 12px 40px 12px 12px;
-            }
-            
-            .credentials-list {
-                grid-template-columns: 1fr;
+                width: 100px;
+                height: 100px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- LEFT SIDE - WELCOME & INFO -->
-        <div class="welcome-side">
+        <!-- HEADER -->
+        <div class="header">
             <div class="logo-container">
                 <div class="logo-placeholder">
-                    <img src="logo.jpg" alt="Group 2 Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<i class=\"fas fa-book-open\"></i>';">
+                    <img src="logo.jpg" alt="Group 2 Logo">
                 </div>
                 <div class="logo-text">
                     <h1>BOOK OF TRANSPARENCY</h1>
-                    <p>Group 2 - Financial Accountability System</p>
-                </div>
-            </div>
-            
-            <div class="welcome-content">
-                <h2>Welcome Back!</h2>
-                <ul class="features-list">
-                    <li><i class="fas fa-check-circle"></i> Track all group expenses in real-time</li>
-                    <li><i class="fas fa-check-circle"></i> Monitor penalties and collections</li>
-                    <li><i class="fas fa-check-circle"></i> View detailed financial reports</li>
-                    <li><i class="fas fa-check-circle"></i> Secure role-based access control</li>
-                    <li><i class="fas fa-check-circle"></i> Print and export financial data</li>
-                </ul>
-            </div>
-            
-            <div class="system-info">
-                <div class="info-item">
-                    <i class="fas fa-calendar-alt"></i>
-                    <span>Effective: November 22, 2025</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-users"></i>
-                    <span>Members: 14 Active Members</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-user-shield"></i>
-                    <span>Verified by: Jayvee Caringal</span>
+                    <p>Group 2 Financial System</p>
                 </div>
             </div>
         </div>
         
-        <!-- RIGHT SIDE - FORMS -->
-        <div class="form-side">
-            <div class="form-container">
-                <!-- LOGIN FORM -->
-                <div id="loginForm" class="form-section">
-                    <h2 class="form-title">Login</h2>
-                    <p class="form-subtitle">Enter your credentials to access the system</p>
-                    
-                    <form id="loginFormElement" onsubmit="event.preventDefault(); handleLogin();">
-                        <div class="form-group">
-                            <label class="form-label" for="username">Username</label>
-                            <div class="input-with-icon">
-                                <input type="text" id="username" class="form-input" placeholder="Enter your username" required>
-                                <div class="input-icon">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" for="password">Password</label>
-                            <div class="input-with-icon">
-                                <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
-                                <div class="input-icon">
-                                    <i class="fas fa-lock"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="login-btn" id="loginButton">
-                            <span id="loginText">Login to Dashboard</span>
-                            <span id="loginLoading" class="loading" style="display: none;"></span>
-                            <i class="fas fa-sign-in-alt"></i>
-                        </button>
-                    </form>
-                    
-                    <div class="form-links">
-                        <div class="link-text">
-                            Don't have an account? 
-                            <button class="toggle-link" onclick="showCreateAccount()">Create Account</button>
-                        </div>
-                        <div>
-                            <button class="forgot-link" onclick="showForgotPassword()">Forgot Password?</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Test Credentials -->
-                    <div class="test-credentials">
-                        <h4><i class="fas fa-key"></i> Test Credentials:</h4>
-                        <div class="credentials-list">
-                            <div class="cred-item"><strong>Admin:</strong> jayvee / ADMIN01</div>
-                            <div class="cred-item"><strong>Secretary:</strong> marjhon / SECMJ</div>
-                            <div class="cred-item"><strong>Treasurer:</strong> christian / TREASCL</div>
-                            <div class="cred-item"><strong>Vice President:</strong> princess / VPRESPL</div>
-                            <div class="cred-item"><strong>Guest:</strong> guest / GUEST123</div>
-                        </div>
-                    </div>
+        <!-- FORM SECTION -->
+        <div class="form-section">
+            <!-- LOGIN PANEL -->
+            <div id="loginPanel" class="form-panel">
+                <h2 class="form-title">Login</h2>
+                <p class="form-subtitle">Enter your credentials to continue</p>
+                
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" id="username" class="form-input" placeholder="Enter username">
                 </div>
                 
-                <!-- CREATE ACCOUNT FORM -->
-                <div id="createAccountForm" class="form-section hidden">
-                    <h2 class="form-title">Create Account</h2>
-                    <p class="form-subtitle">Register for a new account (Admin approval required)</p>
-                    
-                    <form id="createAccountFormElement" onsubmit="event.preventDefault(); handleCreateAccount();">
-                        <div class="form-group">
-                            <label class="form-label" for="fullName">Full Name</label>
-                            <div class="input-with-icon">
-                                <input type="text" id="fullName" class="form-input" placeholder="Enter your full name" required>
-                                <div class="input-icon">
-                                    <i class="fas fa-user-circle"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" for="newUsername">Username</label>
-                            <div class="input-with-icon">
-                                <input type="text" id="newUsername" class="form-input" placeholder="Choose a username" required>
-                                <div class="input-icon">
-                                    <i class="fas fa-at"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" for="newPassword">Password</label>
-                            <div class="input-with-icon">
-                                <input type="password" id="newPassword" class="form-input" placeholder="Create a strong password (min. 6 chars)" required>
-                                <div class="input-icon">
-                                    <i class="fas fa-key"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" for="confirmPassword">Confirm Password</label>
-                            <div class="input-with-icon">
-                                <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm your password" required>
-                                <div class="input-icon">
-                                    <i class="fas fa-lock"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button type="submit" class="login-btn" id="createAccountButton">
-                            <span id="createText">Create Account</span>
-                            <span id="createLoading" class="loading" style="display: none;"></span>
-                            <i class="fas fa-user-plus"></i>
-                        </button>
-                    </form>
-                    
-                    <div class="form-links">
-                        <div class="link-text">
-                            Already have an account? 
-                            <button class="toggle-link" onclick="showLogin()">Login here</button>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="Enter password">
                 </div>
                 
-                <!-- FORGOT PASSWORD MESSAGE -->
-                <div id="forgotPasswordMessage" class="form-section hidden">
-                    <h2 class="form-title">Forgot Password?</h2>
-                    <p class="form-subtitle">Contact the system administrator for assistance</p>
-                    
-                    <div class="message info" style="display: block;">
-                        <div style="text-align: center;">
-                            <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 15px;"></i>
-                            <p><strong>Please contact the system administrator:</strong></p>
-                            <p style="margin: 10px 0; font-size: 1.1rem;">Jayvee Caringal (Admin)</p>
-                            <p><i class="fas fa-envelope"></i> admin@group2system.com</p>
-                            <p><i class="fas fa-phone"></i> (XXX) XXX-XXXX</p>
-                        </div>
+                <button class="form-btn" onclick="handleLogin()">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                
+                <div class="form-links">
+                    <div class="link-text">
+                        Don't have an account? 
+                        <button class="toggle-link" onclick="showCreateAccount()">Create Account</button>
                     </div>
-                    
-                    <div class="form-links" style="margin-top: 30px;">
-                        <button class="toggle-link" onclick="showLogin()">
-                            <i class="fas fa-arrow-left"></i> Back to Login
-                        </button>
+                    <div>
+                        <button class="forgot-link" onclick="showForgotPassword()">Forgot Password?</button>
                     </div>
                 </div>
-                
-                <!-- MESSAGE DISPLAY -->
-                <div class="message" id="message"></div>
             </div>
+            
+            <!-- CREATE ACCOUNT PANEL -->
+            <div id="createAccountPanel" class="form-panel hidden">
+                <h2 class="form-title">Create Account</h2>
+                <p class="form-subtitle">Register for a new account</p>
+                
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" id="fullName" class="form-input" placeholder="Enter your full name">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" id="newUsername" class="form-input" placeholder="Choose a username">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="newPassword" class="form-input" placeholder="Create a password">
+                </div>
+                
+                <button class="form-btn" onclick="handleCreateAccount()">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+                
+                <div class="form-links">
+                    <div class="link-text">
+                        Already have an account? 
+                        <button class="toggle-link" onclick="showLogin()">Login here</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FORGOT PASSWORD PANEL -->
+            <div id="forgotPasswordPanel" class="form-panel hidden">
+                <h2 class="form-title">Forgot Password?</h2>
+                <p class="form-subtitle">Contact administrator for assistance</p>
+                
+                <div class="contact-info">
+                    <h4>Please contact the system administrator</h4>
+                    <p><strong>Jayvee Caringal (Admin)</strong></p>
+                    <p>admin@group2system.com</p>
+                    <p>Contact for password reset</p>
+                </div>
+                
+                <div class="form-links" style="margin-top: 20px;">
+                    <button class="toggle-link" onclick="showLogin()">
+                        <i class="fas fa-arrow-left"></i> Back to Login
+                    </button>
+                </div>
+            </div>
+            
+            <!-- MESSAGE DISPLAY -->
+            <div id="message" class="message hidden"></div>
+        </div>
+        
+        <!-- FOOTER -->
+        <div class="footer">
+            <p><strong>© 2024 Book of Transparency System</strong></p>
+            <p>For authorized users only</p>
         </div>
     </div>
 
-    <!-- Supabase Client -->
+    <!-- Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <script>
-        // Supabase Configuration
-        const SUPABASE_URL = 'https://xudzyjnfntxcxgvocsxy.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh1ZHp5am5mbnR4Y3hndm9jc3h5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg2NTc3ODQsImV4cCI6MjA4NDIzMzc4NH0.8BIHbF4ZqddVDMmR8869CE3N4CmoOuWn1xihUbRK6FU';
-        
         // Initialize Supabase
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const supabaseUrl = 'https://xudzyjnfntxcxgvocsxy.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh1ZHp5am5mbnR4Y3hndm9jc3h5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg2NTc3ODQsImV4cCI6MjA4NDIzMzc4NH0.8BIHbF4ZqddVDMmR8869CE3N4CmoOuWn1xihUbRK6FU';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
         
-        // Show login form
+        // Show/Hide Functions
         function showLogin() {
-            document.getElementById('loginForm').classList.remove('hidden');
-            document.getElementById('createAccountForm').classList.add('hidden');
-            document.getElementById('forgotPasswordMessage').classList.add('hidden');
+            document.getElementById('loginPanel').classList.remove('hidden');
+            document.getElementById('createAccountPanel').classList.add('hidden');
+            document.getElementById('forgotPasswordPanel').classList.add('hidden');
             clearMessage();
-            clearForms();
         }
         
-        // Show create account form
         function showCreateAccount() {
-            document.getElementById('loginForm').classList.add('hidden');
-            document.getElementById('createAccountForm').classList.remove('hidden');
-            document.getElementById('forgotPasswordMessage').classList.add('hidden');
+            document.getElementById('loginPanel').classList.add('hidden');
+            document.getElementById('createAccountPanel').classList.remove('hidden');
+            document.getElementById('forgotPasswordPanel').classList.add('hidden');
             clearMessage();
-            clearForms();
-            // Auto-focus on first field
-            setTimeout(() => document.getElementById('fullName').focus(), 100);
         }
         
-        // Show forgot password message
         function showForgotPassword() {
-            document.getElementById('loginForm').classList.add('hidden');
-            document.getElementById('createAccountForm').classList.add('hidden');
-            document.getElementById('forgotPasswordMessage').classList.remove('hidden');
+            document.getElementById('loginPanel').classList.add('hidden');
+            document.getElementById('createAccountPanel').classList.add('hidden');
+            document.getElementById('forgotPasswordPanel').classList.remove('hidden');
             clearMessage();
         }
         
-        // Clear forms
-        function clearForms() {
-            document.getElementById('loginFormElement').reset();
-            document.getElementById('createAccountFormElement').reset();
-        }
-        
-        // Clear message
-        function clearMessage() {
-            const messageEl = document.getElementById('message');
-            messageEl.style.display = 'none';
-            messageEl.textContent = '';
-        }
-        
-        // Show message
+        // Message Functions
         function showMessage(text, type) {
             const messageEl = document.getElementById('message');
             messageEl.textContent = text;
             messageEl.className = `message ${type}`;
-            messageEl.style.display = 'block';
+            messageEl.classList.remove('hidden');
             
-            // Scroll to message
-            messageEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            
-            // Auto hide after 5 seconds for success/info
             if (type !== 'error') {
                 setTimeout(() => {
-                    messageEl.style.display = 'none';
+                    messageEl.classList.add('hidden');
                 }, 5000);
             }
         }
         
-        // Handle login
+        function clearMessage() {
+            const messageEl = document.getElementById('message');
+            messageEl.classList.add('hidden');
+        }
+        
+        // Login Function
         async function handleLogin() {
-            const username = document.getElementById('username').value.trim();
+            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
             if (!username || !password) {
-                showMessage('Please enter both username and password', 'error');
+                showMessage('Please enter username and password', 'error');
                 return;
             }
             
-            // Show loading
-            document.getElementById('loginText').style.display = 'none';
-            document.getElementById('loginLoading').style.display = 'inline-block';
-            document.getElementById('loginButton').disabled = true;
+            showMessage('Logging in...', 'info');
             
             try {
                 // Get user from Supabase
@@ -709,21 +423,12 @@
                     .eq('is_active', true)
                     .single();
                 
-                // Hide loading
-                document.getElementById('loginText').style.display = 'inline';
-                document.getElementById('loginLoading').style.display = 'none';
-                document.getElementById('loginButton').disabled = false;
-                
                 if (error) {
-                    if (error.code === 'PGRST116') {
-                        showMessage('User not found. Please check your username.', 'error');
-                    } else {
-                        showMessage('Login error. Please try again.', 'error');
-                    }
+                    showMessage('User not found or inactive', 'error');
                     return;
                 }
                 
-                // Check password (plain text comparison for demo)
+                // Check password (plain text for demo)
                 if (user.password_hash === password) {
                     // Store user info
                     localStorage.setItem('userRole', user.role);
@@ -737,35 +442,22 @@
                         window.location.href = 'dashboard.html';
                     }, 1000);
                 } else {
-                    showMessage('Invalid password. Please try again.', 'error');
+                    showMessage('Invalid password', 'error');
                 }
                 
             } catch (error) {
-                // Hide loading
-                document.getElementById('loginText').style.display = 'inline';
-                document.getElementById('loginLoading').style.display = 'none';
-                document.getElementById('loginButton').disabled = false;
-                
-                console.error('Login error:', error);
-                showMessage('Login failed. Please try again.', 'error');
+                showMessage('Login failed: ' + error.message, 'error');
             }
         }
         
-        // Handle create account
+        // Create Account Function
         async function handleCreateAccount() {
-            const fullName = document.getElementById('fullName').value.trim();
-            const username = document.getElementById('newUsername').value.trim();
+            const fullName = document.getElementById('fullName').value;
+            const username = document.getElementById('newUsername').value;
             const password = document.getElementById('newPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
             
-            // Validation
-            if (!fullName || !username || !password || !confirmPassword) {
-                showMessage('Please fill in all fields', 'error');
-                return;
-            }
-            
-            if (password !== confirmPassword) {
-                showMessage('Passwords do not match', 'error');
+            if (!fullName || !username || !password) {
+                showMessage('Please fill all fields', 'error');
                 return;
             }
             
@@ -774,18 +466,10 @@
                 return;
             }
             
-            if (username.length < 3) {
-                showMessage('Username must be at least 3 characters', 'error');
-                return;
-            }
-            
-            // Show loading
-            document.getElementById('createText').style.display = 'none';
-            document.getElementById('createLoading').style.display = 'inline-block';
-            document.getElementById('createAccountButton').disabled = true;
+            showMessage('Creating account...', 'info');
             
             try {
-                // Check if username already exists
+                // Check if username exists
                 const { data: existingUser } = await supabase
                     .from('users')
                     .select('username')
@@ -793,14 +477,11 @@
                     .maybeSingle();
                 
                 if (existingUser) {
-                    showMessage('Username already exists. Please choose another.', 'error');
-                    document.getElementById('createText').style.display = 'inline';
-                    document.getElementById('createLoading').style.display = 'none';
-                    document.getElementById('createAccountButton').disabled = false;
+                    showMessage('Username already exists', 'error');
                     return;
                 }
                 
-                // Create new user (pending approval)
+                // Create new user
                 const { error } = await supabase
                     .from('users')
                     .insert([{
@@ -808,61 +489,32 @@
                         full_name: fullName,
                         role: 'pending',
                         password_hash: password,
-                        is_active: false,
-                        is_approved: false
+                        is_active: false
                     }]);
                 
-                // Hide loading
-                document.getElementById('createText').style.display = 'inline';
-                document.getElementById('createLoading').style.display = 'none';
-                document.getElementById('createAccountButton').disabled = false;
-                
                 if (error) {
-                    console.error('Create account error:', error);
-                    showMessage('Failed to create account. Please try again.', 'error');
+                    showMessage('Error creating account: ' + error.message, 'error');
                     return;
                 }
                 
-                // Show success message and redirect to login
-                showMessage('✅ Account created successfully! Please wait for admin approval. You will be notified when your account is activated.', 'success');
+                showMessage('Account created! Wait for admin approval.', 'success');
                 
-                // Clear form and show login after delay
+                // Return to login after 3 seconds
                 setTimeout(() => {
                     showLogin();
-                }, 4000);
+                }, 3000);
                 
             } catch (error) {
-                // Hide loading
-                document.getElementById('createText').style.display = 'inline';
-                document.getElementById('createLoading').style.display = 'none';
-                document.getElementById('createAccountButton').disabled = false;
-                
-                console.error('Create account error:', error);
-                showMessage('Failed to create account. Please try again.', 'error');
+                showMessage('Error: ' + error.message, 'error');
             }
         }
         
-        // Quick login for testing
-        function quickLogin(username, password) {
-            document.getElementById('username').value = username;
-            document.getElementById('password').value = password;
-            handleLogin();
-        }
-        
-        // Auto-focus first input
+        // Initialize - focus on username field
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('username').focus();
             
-            // Add enter key support
-            document.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    if (!document.getElementById('loginForm').classList.contains('hidden')) {
-                        handleLogin();
-                    } else if (!document.getElementById('createAccountForm').classList.contains('hidden')) {
-                        handleCreateAccount();
-                    }
-                }
-            });
+            // Test with default credentials (remove in production)
+            console.log('Default logins: jayvee/ADMIN01, guest/GUEST123');
         });
     </script>
 </body>
